@@ -1,14 +1,37 @@
-import React from 'react';
-import { View, Text, FlatList, TouchableOpacity, SafeAreaView, StatusBar } from 'react-native';
+import React,{useCallback} from 'react';
+import { View, Text, FlatList, TouchableOpacity, SafeAreaView, StatusBar, BackHandler,Alert } from 'react-native';
 import commonStyles from '../../../styles/commonStyles';
 import { useTasks } from '../../../hooks/useTasks';
 import TaskItem from '../../../components/TaskItem';
 import color from '../../../styles/color';
 import Header from '../../../components/Header';
 import Button from '../../../components/Button';
+import { useFocusEffect } from '@react-navigation/native';
 
 export default TaskListScreen = ({ navigation }) => {
   const { tasks } = useTasks();
+  useFocusEffect(
+    useCallback(() => {
+      const backAction = () => {
+        Alert.alert('Hold on!', 'Are you sure you want to go back?', [
+          {
+            text: 'Cancel',
+            onPress: () => null,
+            style: 'cancel',
+          },
+          { text: 'YES', onPress: () => BackHandler.exitApp() },
+        ]);
+        return true;
+      };
+
+      const backHandler = BackHandler.addEventListener(
+        'hardwareBackPress',
+        backAction,
+      );
+
+      return () => backHandler.remove();
+    }, [])
+  );
 
   const renderList = ({ item }) => (
     <TouchableOpacity onPress={() => navigation.navigate('TaskDetails', { task: item })}>
