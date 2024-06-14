@@ -9,18 +9,25 @@ import SplashScreen from '../screens/TaskManagement/Splash/SplashScreen';
 const Stack = createNativeStackNavigator();
 
 export default function StackNavigator() {
-  return (
-    <NavigationContainer>
-    <Stack.Navigator
-    screenOptions={{
-        headerShown:false
-    }}
-    initialRouteName="Splash">
-    <Stack.Screen name="Splash" component={SplashScreen}/>
-      <Stack.Screen name="TaskList" component={TaskListScreen}/>
-      <Stack.Screen name="TaskDetails" component={TaskDetailsScreen} />
-      <Stack.Screen name="TaskCreate" component={TaskCreateScreen} />
-    </Stack.Navigator>
-    </NavigationContainer>
-  );
+    return (
+        <NavigationContainer>
+            <Stack.Navigator
+                screenOptions={{
+                    headerShown: false
+                }}
+                initialRouteName="Splash">
+                <Stack.Screen name="Splash" component={SplashScreen} />
+                <Stack.Screen name="TaskList" options={{
+                    animation: 'slide_from_bottom',
+                }}
+                    component={TaskListScreen} />
+                <Stack.Screen name="TaskDetails"options={{
+                    animation: 'slide_from_right',
+                }} component={TaskDetailsScreen} />
+                <Stack.Screen name="TaskCreate" options={{
+                    animation: 'slide_from_bottom',
+                }} component={TaskCreateScreen} />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
