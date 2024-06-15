@@ -2,7 +2,6 @@ import React from 'react';
 import { View, Text, StyleSheet, Dimensions } from 'react-native';
 import color from '../styles/color';
 import commonStyles from '../styles/commonStyles';
-const {height}=Dimensions.get('window')
 export default TaskItem = ({ task }) => (
   <View style={styles.taskItem}>
     <View>

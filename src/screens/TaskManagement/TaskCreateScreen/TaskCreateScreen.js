@@ -17,23 +17,20 @@ export default TaskCreateScreen = ({ navigation }) => {
     const [isSuccessVisible, setIsSuccessVisible] = useState(false);
     const [isDatePickerOpen, setIsDatePickerOpen] = useState(false);
 
-    const handleSubmit = () => {
+    const handleSubmit = () => {       //onPress createTask button
         const newTask = {
             id: Date.now().toString(),
             title,
             description,
             dueDate: dueDate.toISOString().split('T')[0]
-
         };
-        const validationError = validateTask(newTask);
+        const validationError = validateTask(newTask); 
         if (validationError) {
             Alert.alert('Error', validationError);
         } else {
             addTask(newTask);
             setIsSuccessVisible(true);
         }
-
-
     };
     const handleSuccessClose = () => {
         setIsSuccessVisible(false);
